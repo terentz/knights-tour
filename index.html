@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="UTF-8">
+ <link rel="stylesheet" type="text/css" href="./css/ui.css"/>
+ <!-- DYNAMIC STYLES -->
+ <style id="boardDimensions">
+/* This stylesheet contains dynanically generated styles for the board table */
+td.square {
+	width: 59px;
+	height: 59px;
+}
+img#IMG_knight {
+    height: 54px;
+    color: black;
+}
+ </style>
+ <title>Knight's Tour Tester</title>
+</head>
+<body>
+ <form>
+
+  <!-- TODO: INSERT MAIN HEADING HERE -->
+  <section id="uiContainer">
+  
+   <!-- <section id="configUi" class=""> -->
+   <!-- TEST LINE (swap with above) -->
+   <section id="configUi" class="uiMain">
+    <span class="uiHeading">Knight's Tour Setup</span>
+    <!-- TODO review the above span in a html5 context -->
+    <br/>
+    <br/>
+    <table id="configUiTable">
+     <tr id="numColsRow">
+      <td>
+       <label for="NUM_numCols" id="numColsLabel">width in columns:</label>
+      </td>
+      <td>
+       <input type="number" id="NUM_numCols" name="NUM_numCols" class="boardEdgeInput" min="3" max="12" size="2" value="8"/>
+       
+      </td>
+      <td id="NUM_numCols_msg" class="validationAlertCell">
+      </td>
+     </tr>
+     <tr id="numRowsRow">
+      <td>
+       <label for="NUM_numRows" id="numRowsLabel">height in rows:</label>
+      </td>
+      <td>
+       <input type="number" id="NUM_numRows" name="NUM_numRows" class="boardEdgeInput" min="3" max="12" size="2" value="8"/>
+      </td>
+      <td id="NUM_numRows_msg" class="validationAlertCell">
+      </td>
+     </tr>
+     
+     <!-- TODO focus on NUM_numRows after validation -->
+     
+     <tr id="applySettingsRow">
+      <td>
+      </td>
+      <td colspan="2">
+       <div id="applyConfigSettingsDiv" class="uiButton">Show&nbsp;board</div>
+       <!-- 
+       <input type="button" id="BTN_applyConfigSettings" value="Apply settings">
+       -->
+      </td>
+     </tr>
+    </table>
+    <div class="hidden">
+     <input type="number" id="extraField"/>
+    </div>
+   </section> <!-- END configUi -->
+   
+   <!-- <section id="boardUi" class="hidden"> -->
+   <!-- TEST LINE (swap with above) -->
+   <section id="boardUi" class="uiMain hidden"> 
+
+<script>
+
+/* JS GLOBALS */
+
+// constants 
+var minSquareSize = 50,
+	minSqPerSide = 3,
+	maxSqPerSide = 12,
+	knightImgPath = '../images/knightswalk/knight.png',
+	knightImgId = 'IMG_knight',
+	knightImgTag = '<img id="' + knightImgId + '" src="' + knightImgPath + '" alt="current position"/>',
+	asciiDiff = 96;
+	
+// generated 
+var browserWidth = 0,
+	browserHeight = 0,
+	numCols = 0,
+	numRows = 0,
+	requiredMoves = 0,
+	sqSize = 59, // TODO generate this value 
+	orientation = "landscape";	// TODO generate this value 
+
+// dynamic 
+var started = false,
+	allSquares = new Array(), 
+	usedSquares = new Array(), 
+	prevId = "",
+	currId = "",
+	nextId = "",
+	moveNum = 0;
+</script>
+
+
+
+
+
+
+    
+    <section id="boardContainer">
+     <table id="boardTable">
+<!--
+      <tr id="rank4">
+       <td class="rankHeading">1</td>
+       <td id="a1" class="square black"></td>
+      </tr>
+      <tr>
+       <td></td>
+       <td>a</td>
+      </tr> 
+-->
+     </table>
+    </section> <!-- END boardContainer -->
+
+    <section id="moveLogContainer" class="hidden">
+    <div class="logDiv">1. a8</div>
+<div class="logDiv">2. c7</div>
+<div class="logDiv">3. e8</div>
+<div class="logDiv">4. g7</div>
+<div class="logDiv">5. h5</div>
+<div class="logDiv">6. g3</div>
+<div class="logDiv">7. h1</div>
+<div class="logDiv">8. f2</div>
+<div class="logDiv">9. d1</div>
+<div class="logDiv">10. b2</div>
+<div class="logDiv">11. a4</div>
+<div class="logDiv">12. b6</div>
+<div class="logDiv">13. c8</div>
+<div class="logDiv">14. a7</div>
+<div class="logDiv">15. b5</div>
+<div class="logDiv">16. a3</div>
+<div class="logDiv">17. b1</div>
+<div class="logDiv">18. d2</div>
+<div class="logDiv">19. b3</div>
+<div class="logDiv">20. a1</div>
+<div class="logDiv">21. c2</div>
+<div class="logDiv">22. e1</div>
+<div class="logDiv">23. g2</div>
+<div class="logDiv">24. h4</div>
+<div class="logDiv">25. g6</div>
+<div class="logDiv">26. h8</div>
+<div class="logDiv">27. f7</div>
+<div class="logDiv">28. d8</div>
+<div class="logDiv">29. b7</div>
+<div class="logDiv">30. a5</div>
+<div class="logDiv">31. c6</div>
+<div class="logDiv">32. b8</div>
+<div class="logDiv">33. a6</div>
+<div class="logDiv">34. b4</div>
+<div class="logDiv">35. a2</div>
+<div class="logDiv">36. c1</div>
+<div class="logDiv">37. e2</div>
+<div class="logDiv">38. g1</div>
+<div class="logDiv">39. f3</div>
+<div class="logDiv">40. h2</div>
+<div class="logDiv">41. f1</div>
+<div class="logDiv">42. e3</div>
+<div class="logDiv">43. d5</div>
+<div class="logDiv">44. f6</div>
+<div class="logDiv">45. d7</div>
+<div class="logDiv">46. f8</div>
+<div class="logDiv">47. h7</div>
+<div class="logDiv">48. g5</div>
+<div class="logDiv">49. h3</div>
+<div class="logDiv">50. f4</div>
+<div class="logDiv">51. e6</div>
+<div class="logDiv">52. c5</div>
+<div class="logDiv">53. e4</div>
+    </section>
+    <section id="mainControlContainer">
+     <section id="takeBackControlContainer">
+      <div id="BTN_takeBackMoveDiv" class="uiButton">Move&nbsp;back</div>
+     </section>
+     <section id="resetControlContainer">
+      <div id="BTN_resetBoardDiv" class="uiButton">Clear&nbsp;board</div>
+      <br/><div id="BTN_reconfigureBoardDiv" class="uiButton">Reconfigure</div>
+     </section>
+	</section>    
+    
+   </section> <!-- END boardUi -->
+   
+  </section> <!-- END uiContainer -->
+  
+ </form>
+ 
+
+ <!-- js IMPORTS -->
+ <script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+ 
+ <!-- js APPLICATION SCRIPTS -->
+ <script type="text/javascript" src="./js/setup.js"></script>
+ <script type="text/javascript" src="./js/game.js"></script>
+ 
+ <!-- js PRE-LOAD FUNCTIONS -->
+ <script></script>
+
+ <!-- TEST SCRIPT -->
+ <script>
+ 
+ 
+ </script>
+ 
+
+ <!-- EVENT HANDLERS -->
+ <script>
+//$(".square").bind("click", move);
+//$("#BTN_resetBoardDiv").bind("click", reset);
+//$(document).on("click", "#BTN_resetBoardDiv", reset);
+//$(document).on("click", "#BTN_reconfigureBoardDiv", reset);
+
+
+$("#applyConfigSettingsDiv").bind("click", showBoard);
+$(".boardEdgeInput").on("blur keyup", validateBoardSizeField);
+$("#BTN_resetBoardDiv").bind("click", reset);
+$("#BTN_reconfigureBoardDiv").bind("click", reset);
+$("#BTN_takeBackMoveDiv").bind("click", moveBack);
+//$(document).on( 'click', "#BTN_takeBackMoveDiv", moveBack );
+ </script>
+
+
+<!-- js POST LOAD FUNCTIONS -->
+ 
+ 
+ 
+</body>
+</html>

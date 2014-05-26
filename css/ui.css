@@ -1,0 +1,220 @@
+@CHARSET "UTF-8";
+
+html{
+	background-color:#F6F6F6;
+	color:#777777;
+	font-family:arial;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	/* text-shadow:1px 1px 0px #ffffff; */
+}
+
+.hidden {
+	display: none;
+}
+
+#boardContainer {
+	width: 530px;
+}
+#uiContainer {
+	/* START TESTING */
+	
+	/* END TESTING */
+	
+}
+.uiMain {
+	background-color: #B5B5B5;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	padding: 5px;
+
+}
+
+#configUi {
+	/* START TESTING */
+	width: 400px;
+	height: 200px;
+	/* END TESTING */
+
+}
+
+
+/* BOARD */
+#boardUi {
+	position: relative;
+	width: 1000px;
+	height: 540px;	
+}
+table#boardTable {
+	background-color: #666666;
+/* 	border: 1px solid #DDDDDD; */
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	padding: 4px;
+}
+td {
+	text-align:center;
+}
+/* HEADINGS */
+td.tableHeading {
+	color: #F6F6F6;
+}
+td.rankHeading {
+	padding-left:3px;
+	padding-right:10px;
+}
+td.fileHeading {
+	padding-top:10px;
+	padding-bottom:3px;
+}
+/* SQUARES */
+td.square {
+	margin: 0px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+td.white {
+	background-color: #F4F4F4;
+	color:#333333;
+/*	text-shadow:1px 1px 0px #666666; */
+}
+td.black {
+	background-color: #333333;
+	color:#F4F4F4;
+/*	text-shadow:1px 1px 0px #777777; */
+}
+td.current {
+	
+}
+img#IMG_knight {
+    max-width: 100%;
+}
+
+td.valid:hover, td.current:hover{
+	cursor: pointer;
+}
+/*
+#moveLogContainer {
+	position : relative;
+	float : left;
+	max-height: 440px;
+	width: 160px;
+	left: 440px;
+	top: -420px;
+}
+*/
+/* MOVE LOG */
+#moveLogContainer {
+	background-color: #666666;
+	border: 1px solid #DDDDDD;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	padding: 10px;
+	font-size:14.5px;
+	position : absolute;
+/*	left: 550px; */
+	right: 5px;
+	top: 5px;
+	/*height: 500px;*/
+	max-width: 450px;
+	height: auto;
+}
+.logDiv {
+	float: left;
+	color: #F4F4F4;
+	position: relative;
+	text-align:center;
+	width: 57px;
+	height: 26px;
+}
+/* GAME CONTROLS */
+/*
+section#takeBackControlContainer {
+	position: absolute;
+	top: 515px;
+	left: 550px;
+}
+section#resetControlContainer {
+	position: absolute;
+	top: 480px;
+	right: 10px;
+}
+section#resetControlContainer div {
+	margin-top:4px;
+	margin-bottom:4px;	
+}
+*/
+section#mainControlContainer * div {
+	margin-top:4px;
+	margin-bottom:4px;	
+}
+section#mainControlContainer {
+	position: absolute;
+	top: 400px;
+	left: 550px;
+}
+section#takeBackControlContainer {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+section#resetControlContainer {
+	position: absolute;
+	top: 480px;
+	right: 10px;
+}
+/* BUTTONS */
+div.uiButton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background-color:#ededed;
+	-webkit-border-top-left-radius:6px;
+	-moz-border-radius-topleft:6px;
+	border-top-left-radius:6px;
+	-webkit-border-top-right-radius:6px;
+	-moz-border-radius-topright:6px;
+	border-top-right-radius:6px;
+	-webkit-border-bottom-right-radius:6px;
+	-moz-border-radius-bottomright:6px;
+	border-bottom-right-radius:6px;
+	-webkit-border-bottom-left-radius:6px;
+	-moz-border-radius-bottomleft:6px;
+	border-bottom-left-radius:6px;
+	text-indent:0;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+/*	color:#777777;
+	font-family:arial;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal; */
+	height:22px;
+	line-height:22px;
+	width:100px;
+	text-decoration:none;
+	text-align:center;
+/*	text-shadow:1px 1px 0px #ffffff; */
+}
+.uiButton:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+	background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+	background-color:#dfdfdf;
+}
+.uiButton:active {
+	position:relative;
+	top:1px;
+}
+
+
+

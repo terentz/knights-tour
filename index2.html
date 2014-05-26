@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="UTF-8">
+ <!--  <link rel="stylesheet" type="text/css" href="./css/ui.css"/> -->
+ <!-- DYNAMIC STYLES -->
+ <style id="boardDimensions">
+/* This stylesheet contains dynanically generated styles for the board table */
+html{
+	background-color:#F6F6F6;
+	color:#777777;
+	font-family:arial;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	/* text-shadow:1px 1px 0px #ffffff; */
+}
+body{
+	margin: 2px;
+}
+
+/* TOP LEVEL UI */
+.uiMain {
+	background-color: #B5B5B5;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	padding: 5px;
+
+}
+
+/* CONFIG UI */
+#configUi {
+	/* START TESTING */
+	width: 400px;
+	height: 200px;
+	/* END TESTING */
+
+}
+
+/* GAME UI */
+#gameUi {
+	position: relative;
+/* 	width: 1000px; */
+/* 	height: 540px;	 */
+/*	height: calculated; */
+/*	width: calculated; */
+}
+
+/* BOARD */
+#boardContainer{
+	float: left;
+/* 	width: 530px; */
+/* 	height: 530px; */
+/*	height: calculated; */
+/*	width: calculated; */
+}
+table#boardTable {
+	background-color: #666666;
+/* 	border: 1px solid #DDDDDD; */
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	padding: 4px;
+}
+td {
+	text-align:center;
+}
+
+/* TABLE HEADINGS */
+td.tableHeading {
+	color: #F6F6F6;
+}
+td.rankHeading {
+	padding-left:3px; /* TODO remove */
+	padding-right:10px; /* TODO remove */
+}
+td.fileHeading {
+	padding-top:10px; /* TODO remove */
+	padding-bottom:3px; /* TODO remove */
+}
+
+/* SQUARES */
+td.square {
+	width: 59px; /* TODO calculate */
+	height: 59px; /* TODO calculate */
+	margin: 0px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+td.white {
+	background-color: #F4F4F4;
+	color:#333333;
+}
+td.black {
+	background-color: #333333;
+	color:#F4F4F4;
+}
+img#IMG_knight {
+    height: 54px; /* TODO calculate */
+    max-width: 100%;
+    color: black;
+}
+td.valid:hover, td.current:hover{
+	cursor: pointer;
+}
+
+/* RIGHT HAND COLUMN (OPS) */
+#opsContainer{
+	position: relative;
+/* 	border: 1px solid black; */
+	float: right;
+	display: table;
+}
+
+/* MOVE LOG */
+#moveLogContainer{
+	background-color: #666666;
+	border: 1px solid #DDDDDD;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	padding: 10px; /* TODO calculate */
+	font-size: 14.5px; /* TODO calculate */
+/* 	position : absolute; */
+/* 	right: 5px; */
+/* 	top: 5px; */
+	max-width: 450px;
+	height: auto;
+
+	display: block;
+	height: auto;
+/* 	border: 1px solid red; */
+}
+.logDiv{
+	padding-left: 10px; /* TODO calculate */ 
+	padding-right: 10px; /* TODO calculate */
+	padding-top: 3px; /* TODO calculate */
+	padding-bottom: 3px; /* TODO calculate */
+	float: left;
+	color: #F4F4F4;
+	position: relative;
+	text-align:center;
+}
+
+/* BUTTONS */
+#buttonContainer{
+	display: table-row;
+	height: 100%;
+}
+
+/* BUTTON STYLES */
+#buttonContainer>div{
+	margin: 2px; /* TODO calculate */
+}
+.uiButton{
+/* TODO possibly need to calculate most of these,
+ * depending on results on different devices */
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background-color:#ededed;
+	-webkit-border-top-left-radius:6px;
+	-moz-border-radius-topleft:6px;
+	border-top-left-radius:6px;
+	-webkit-border-top-right-radius:6px;
+	-moz-border-radius-topright:6px;
+	border-top-right-radius:6px;
+	-webkit-border-bottom-right-radius:6px;
+	-moz-border-radius-bottomright:6px;
+	border-bottom-right-radius:6px;
+	-webkit-border-bottom-left-radius:6px;
+	-moz-border-radius-bottomleft:6px;
+	border-bottom-left-radius:6px;
+	text-indent:0;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	height:22px;
+	line-height:22px;
+	width:100px; 
+	text-decoration:none;
+	text-align:center;
+  	margin: 2px;  
+}
+.uiButton:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+	background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+	background-color:#dfdfdf;
+}
+.uiButton:active {
+	position:relative;
+	top:1px;
+}uiPadding
+
+/* INNER BUTTON CONTAINERS */
+#takeBackControlContainer{
+	position: relative;
+ 	top: 0px; 
+ 	left: 0px; 
+}
+#resetControlContainer{
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+}
+
+/* BUTTON DIVS */
+#BTN_reconfigureBoardDiv{
+ 	float: right; 
+}
+#BTN_resetBoardDiv{
+ 	float: right; 
+}
+
+/* DYNAMIC ELEMENTS */
+.hidden {
+	display: none;
+}
+.clear{
+	clear: both;
+}
+ </style>
+ <script>
+
+/* JS GLOBALS */
+
+// constants 
+var minSquareSize = 50,
+	minSqPerSide = 3,
+	maxSqPerSide = 12,
+	knightImgPath = '../images/knightswalk/knight.png',
+	knightImgId = 'IMG_knight',
+	knightImgTag = '<img id="' + knightImgId + '" src="' + knightImgPath + '" alt="current position"/>',
+	asciiDiff = 96,
+	scrollOverlap = 10, // TODO ascertain whether this may require browser-dependent calculation 
+	bodyMargin = 2,  // TODO apply this value 
+	uiMainPadding = 4,	// TODO apply this value 
+	uiPadding = 4,  // TODO apply this value 
+	boardPadding = 4;  // TODO apply this value 
+	
+	
+// generated 
+var browserWidth = 0,
+	browserHeight = 0,
+	numCols = 0,
+	numRows = 0,
+	gameUiWd = 0,
+	gameUiHt = 0,
+	requiredMoves = 0,
+	sqSize = 59, // TODO generate this value 
+	boardContSqLen = 0,
+	orientation = "landscape";	// TODO generate this value 
+
+// dynamic 
+var started = false,
+	allSquares = new Array(), 
+	usedSquares = new Array(), 
+	boardSqLen = 0,
+	prevId = "",
+	currId = "",
+	nextId = "",
+	moveNum = 0;
+ </script>
+
+ <title>Knight's Tour Tester</title>
+</head>
+<body>
+ <form>
+
+  <!-- TODO: INSERT MAIN HEADING HERE -->
+  <section id="uiContainer">
+  
+   <!-- <section id="configUi" class=""> -->
+   <!-- TEST LINE (swap with above) -->
+   <section id="configUi" class="uiMain">
+    <span class="uiHeading">Knight's Tour Setup</span>
+    <!-- TODO review the above span in a html5 context -->
+    <br/>
+    <br/>
+    <table id="configUiTable">
+     <tr id="numColsRow">
+      <td>
+       <label for="NUM_numCols" id="numColsLabel">width in columns:</label>
+      </td>
+      <td>
+       <input type="number" id="NUM_numCols" name="NUM_numCols" class="boardEdgeInput" min="3" max="12" size="2" value="8"/>
+       
+      </td>
+      <td id="NUM_numCols_msg" class="validationAlertCell">
+      </td>
+     </tr>
+     <tr id="numRowsRow">
+      <td>
+       <label for="NUM_numRows" id="numRowsLabel">height in rows:</label>
+      </td>
+      <td>
+       <input type="number" id="NUM_numRows" name="NUM_numRows" class="boardEdgeInput" min="3" max="12" size="2" value="8"/>
+      </td>
+      <td id="NUM_numRows_msg" class="validationAlertCell">
+      </td>
+     </tr>
+     
+     <!-- TODO focus on NUM_numRows after validation -->
+     
+     <tr id="applySettingsRow">
+      <td>
+      </td>
+      <td colspan="2">
+       <div id="applyConfigSettingsDiv" class="uiButton">Show&nbsp;board</div>
+       <!-- 
+       <input type="button" id="BTN_applyConfigSettings" value="Apply settings">
+       -->
+      </td>
+     </tr>
+    </table>
+    <div class="hidden">
+     <input type="number" id="extraField"/>
+    </div>
+   </section> <!-- END configUi -->
+   
+   <!-- <section id="boardUi" class="hidden"> -->
+   <!-- TEST LINE (swap with above) -->
+   <section id="gameUi" class="uiMain hidden"> 
+
+
+    <section id="boardContainer">
+     <table id="boardTable">
+<!--
+      <tr id="rank4">
+       <td class="rankHeading">1</td>
+       <td id="a1" class="square black"></td>
+      </tr>
+      <tr>
+       <td></td>
+       <td>a</td>
+      </tr> 
+-->
+     </table>
+    </section> <!-- END boardContainer -->
+    <section id="opsContainer">
+     <section id="moveLogContainer" class="hidden">
+      <div class="logDiv">1. a8</div>
+      <div class="logDiv">2. c7</div>
+      <div class="logDiv">3. e8</div>
+      <div class="logDiv">4. g7</div>
+      <div class="logDiv">5. h5</div>
+      <div class="logDiv">6. g3</div>
+      <div class="logDiv">7. h1</div>
+      <div class="logDiv">8. f2</div>
+      <div class="logDiv">9. d1</div>
+      <div class="logDiv">10. b2</div>
+      <div class="logDiv">11. a4</div>
+      <div class="logDiv">12. b6</div>
+      <div class="logDiv">13. c8</div>
+      <div class="logDiv">14. a7</div>
+      <div class="logDiv">15. b5</div>
+      <div class="logDiv">16. a3</div>
+      <div class="logDiv">17. b1</div>
+      <div class="logDiv">18. d2</div>
+      <div class="logDiv">19. b3</div>
+      <div class="logDiv">20. a1</div>
+      <div class="logDiv">21. c2</div>
+      <div class="logDiv">22. e1</div>
+      <div class="logDiv">23. g2</div>
+      <div class="logDiv">24. h4</div>
+      <div class="logDiv">25. g6</div>
+      <div class="logDiv">26. h8</div>
+      <div class="logDiv">27. f7</div>
+      <div class="logDiv">28. d8</div>
+      <div class="logDiv">29. b7</div>
+      <div class="logDiv">30. a5</div>
+      <div class="logDiv">31. c6</div>
+      <div class="logDiv">32. b8</div>
+      <div class="logDiv">33. a6</div>
+      <div class="logDiv">34. b4</div>
+      <div class="logDiv">35. a2</div>
+      <div class="logDiv">36. c1</div>
+      <div class="logDiv">37. e2</div>
+      <div class="logDiv">38. g1</div>
+      <div class="logDiv">39. f3</div>
+      <div class="logDiv">40. h2</div>
+      <div class="logDiv">41. f1</div>
+      <div class="logDiv">42. e3</div>
+      <div class="logDiv">43. d5</div>
+      <div class="logDiv">44. f6</div>
+      <div class="logDiv">45. d7</div>
+      <div class="logDiv">46. f8</div>
+      <div class="logDiv">47. h7</div>
+      <div class="logDiv">48. g5</div>
+      <div class="logDiv">49. h3</div>
+      <div class="logDiv">50. f4</div>
+      <div class="logDiv">51. e6</div>
+      <div class="logDiv">52. c5</div>
+      <div class="logDiv">53. e4</div>
+      <br class="clear"/>
+     </section>
+ <!--     <section id="mainControlContainer"> -->
+     <section id="buttonContainer">
+      <section id="takeBackControlContainer">
+       <div id="BTN_takeBackMoveDiv" class="uiButton">Move&nbsp;back</div>
+      </section>
+      <section id="resetControlContainer">
+       <div id="BTN_reconfigureBoardDiv" class="uiButton">Reconfigure</div>
+       <div id="BTN_resetBoardDiv" class="uiButton">Clear&nbsp;board</div>
+      </section>
+	 </section>    
+    </section>
+   </section> <!-- END boardUi -->
+   
+  </section> <!-- END uiContainer -->
+  
+ </form>
+ 
+
+ <!-- js IMPORTS -->
+ <script type="text/javascript" src="../js/jquery.js"></script>
+ 
+ <!-- js APPLICATION SCRIPTS -->
+ <script type="text/javascript" src="./js/setup.js"></script>
+ <script type="text/javascript" src="./js/game.js"></script>
+ 
+ <!-- js PRE-LOAD FUNCTIONS -->
+ <script></script>
+
+ <!-- TEST SCRIPT -->
+ <script>
+ 
+ 
+ </script>
+ 
+
+ <!-- EVENT HANDLERS -->
+ <script>
+$("#applyConfigSettingsDiv").bind("click", showBoard);
+$(".boardEdgeInput").on("blur keyup", validateBoardSizeField);
+$("#BTN_resetBoardDiv").bind("click", reset);
+$("#BTN_reconfigureBoardDiv").bind("click", reset);
+$("#BTN_takeBackMoveDiv").bind("click", moveBack);
+ </script>
+
+
+<!-- js POST LOAD FUNCTIONS -->
+ <script>
+$(document).ready(function() { 
+	var logPanelWidth = 0;  // TODO automate this value 
+	// Set browser dimensions
+	browserWidth = getWidth() - scrollOverlap;
+	browserHeight = getHeight() - scrollOverlap;
+	//alert('browser(x,y):(' + browserWidth + ',' + browserHeight + ')');
+	// Set game UI container dimensions
+	gameUiWd = browserWidth - ( 2 * bodyMargin );
+	gameUiHt = browserHeight - ( 2 * bodyMargin );
+	$("#gameUi").css("width", gameUiWd + "px");
+	$("#gameUi").css("height", gameUiHt + "px");
+	// Set board dimensions
+	boardContSqLen = browserHeight - 
+				((	2 * bodyMargin ) +
+				 (	2 * uiPadding ));
+	$("#boardContainer").css("width", boardContSqLen + "px");
+	$("#boardContainer").css("height", boardContSqLen + "px");
+	$("#opsContainer").css("height", boardContSqLen + "px");
+	//alert('function complete');
+	if ( browserWidth < browserHeight ) {
+		orientation = "portrait";
+	} else {
+		orientation = "landscape";
+	}
+	var test = "x:" + browserWidth + " | y:" + browserHeight + " | orientation:" + orientation;
+	//alert( test );
+		
+});
+ </script>
+ 
+ 
+</body>
+</html>
