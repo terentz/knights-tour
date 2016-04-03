@@ -7,95 +7,93 @@
  <style id="boardDimensions">
 /* This stylesheet contains dynanically generated styles for the board table */
 html{
-	background-color:#F6F6F6;
-	color:#777777;
-	font-family:arial;
-	font-size:15px;
-	font-weight:bold;
-	font-style:normal;
-	/* text-shadow:1px 1px 0px #ffffff; */
+    background-color:#F6F6F6;
+    color:#777777;
+    font-family:arial;
+    font-size:15px;
+    font-weight:bold;
+    font-style:normal;
+    /* text-shadow:1px 1px 0px #ffffff; */
 }
 body{
-	margin: 2px;
+    margin: 2px;
 }
 
 /* TOP LEVEL UI */
 .uiMain {
-	background-color: #B5B5B5;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	padding: 5px;
-
+    background-color: #B5B5B5;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    padding: 5px;
 }
 
 /* CONFIG UI */
 #configUi {
-	/* START TESTING */
-	width: 400px;
-	height: 200px;
-	/* END TESTING */
-
+    /* START TESTING */
+    width: 400px;
+    height: 200px;
+    /* END TESTING */
 }
 
 /* GAME UI */
 #gameUi {
-	position: relative;
-/* 	width: 1000px; */
-/* 	height: 540px;	 */
-/*	height: calculated; */
-/*	width: calculated; */
+    position: relative;
+/*  width: 1000px; */
+/*  height: 540px;	 */
+/*  height: calculated; */
+/*  width: calculated; */
 }
 
 /* BOARD */
 #boardContainer{
-	float: left;
-/* 	width: 530px; */
-/* 	height: 530px; */
-/*	height: calculated; */
-/*	width: calculated; */
+    float: left;
+/*  width: 530px; */
+/*  height: 530px; */
+/*  height: calculated; */
+/*  width: calculated; */
 }
 table#boardTable {
-	background-color: #666666;
-/* 	border: 1px solid #DDDDDD; */
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	padding: 4px;
+    background-color: #666666;
+/*  border: 1px solid #DDDDDD; */
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    padding: 4px;
 }
 td {
-	text-align:center;
+    text-align:center;
 }
 
 /* TABLE HEADINGS */
 td.tableHeading {
-	color: #F6F6F6;
+    color: #F6F6F6;
 }
 td.rankHeading {
-	padding-left:3px; /* TODO remove */
-	padding-right:10px; /* TODO remove */
+    padding-left:3px; /* TODO remove */
+    padding-right:10px; /* TODO remove */
 }
 td.fileHeading {
-	padding-top:10px; /* TODO remove */
-	padding-bottom:3px; /* TODO remove */
+    padding-top:10px; /* TODO remove */
+    padding-bottom:3px; /* TODO remove */
 }
 
 /* SQUARES */
 td.square {
-	width: 59px; /* TODO calculate */
-	height: 59px; /* TODO calculate */
-	margin: 0px;
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border-radius: 2px;
+    width: 59px; /* TODO calculate */
+    height: 59px; /* TODO calculate */
+    margin: 0px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
 }
 td.white {
-	background-color: #F4F4F4;
-	color:#333333;
+    background-color: #F4F4F4;
+    color:#333333;
 }
 td.black {
-	background-color: #333333;
-	color:#F4F4F4;
+    background-color: #333333;
+    color:#F4F4F4;
 }
 img#IMG_knight {
     height: 54px; /* TODO calculate */
@@ -103,26 +101,26 @@ img#IMG_knight {
     color: black;
 }
 td.valid:hover, td.current:hover{
-	cursor: pointer;
+    cursor: pointer;
 }
 
 /* RIGHT HAND COLUMN (OPS) */
 #opsContainer{
-	position: relative;
-/* 	border: 1px solid black; */
-	float: right;
-	display: table;
+    position: relative;
+/*  border: 1px solid black; */
+    float: right;
+    display: table;
 }
 
 /* MOVE LOG */
 #moveLogContainer{
-	background-color: #666666;
-	border: 1px solid #DDDDDD;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	padding: 10px; /* TODO calculate */
-	font-size: 14.5px; /* TODO calculate */
+    background-color: #666666;
+    border: 1px solid #DDDDDD;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    padding: 10px; /* TODO calculate */
+    font-size: 14.5px; /* TODO calculate */
 /* 	position : absolute; */
 /* 	right: 5px; */
 /* 	top: 5px; */
@@ -419,7 +417,7 @@ var started = false,
  
 
  <!-- js IMPORTS -->
- <script type="text/javascript" src="../js/jquery.js"></script>
+ <script type="text/javascript" src="./js/jquery-2.2.2.js"></script>
  
  <!-- js APPLICATION SCRIPTS -->
  <script type="text/javascript" src="./js/setup.js"></script>

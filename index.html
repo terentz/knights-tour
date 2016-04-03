@@ -5,7 +5,7 @@
  <link rel="stylesheet" type="text/css" href="./css/ui.css"/>
  <!-- DYNAMIC STYLES -->
  <style id="boardDimensions">
-/* This stylesheet contains dynanically generated styles for the board table */
+/* This stylesheet contains dynamically generated styles for the board table */
 td.square {
 	width: 59px;
 	height: 59px;
@@ -36,7 +36,7 @@ img#IMG_knight {
        <label for="NUM_numCols" id="numColsLabel">width in columns:</label>
       </td>
       <td>
-       <input type="number" id="NUM_numCols" name="NUM_numCols" class="boardEdgeInput" min="3" max="12" size="2" value="8"/>
+       <input type="number" id="NUM_numCols" name="NUM_numCols" class="boardEdgeInput" min="3" max="12" length="2" value="8"/>
        
       </td>
       <td id="NUM_numCols_msg" class="validationAlertCell">
@@ -74,45 +74,6 @@ img#IMG_knight {
    <!-- <section id="boardUi" class="hidden"> -->
    <!-- TEST LINE (swap with above) -->
    <section id="boardUi" class="uiMain hidden"> 
-
-<script>
-
-/* JS GLOBALS */
-
-// constants 
-var minSquareSize = 50,
-	minSqPerSide = 3,
-	maxSqPerSide = 12,
-	knightImgPath = '../images/knightswalk/knight.png',
-	knightImgId = 'IMG_knight',
-	knightImgTag = '<img id="' + knightImgId + '" src="' + knightImgPath + '" alt="current position"/>',
-	asciiDiff = 96;
-	
-// generated 
-var browserWidth = 0,
-	browserHeight = 0,
-	numCols = 0,
-	numRows = 0,
-	requiredMoves = 0,
-	sqSize = 59, // TODO generate this value 
-	orientation = "landscape";	// TODO generate this value 
-
-// dynamic 
-var started = false,
-	allSquares = new Array(), 
-	usedSquares = new Array(), 
-	prevId = "",
-	currId = "",
-	nextId = "",
-	moveNum = 0;
-</script>
-
-
-
-
-
-
-    
     <section id="boardContainer">
      <table id="boardTable">
 <!--
@@ -129,59 +90,9 @@ var started = false,
     </section> <!-- END boardContainer -->
 
     <section id="moveLogContainer" class="hidden">
-    <div class="logDiv">1. a8</div>
-<div class="logDiv">2. c7</div>
-<div class="logDiv">3. e8</div>
-<div class="logDiv">4. g7</div>
-<div class="logDiv">5. h5</div>
-<div class="logDiv">6. g3</div>
-<div class="logDiv">7. h1</div>
-<div class="logDiv">8. f2</div>
-<div class="logDiv">9. d1</div>
-<div class="logDiv">10. b2</div>
-<div class="logDiv">11. a4</div>
-<div class="logDiv">12. b6</div>
-<div class="logDiv">13. c8</div>
-<div class="logDiv">14. a7</div>
-<div class="logDiv">15. b5</div>
-<div class="logDiv">16. a3</div>
-<div class="logDiv">17. b1</div>
-<div class="logDiv">18. d2</div>
-<div class="logDiv">19. b3</div>
-<div class="logDiv">20. a1</div>
-<div class="logDiv">21. c2</div>
-<div class="logDiv">22. e1</div>
-<div class="logDiv">23. g2</div>
-<div class="logDiv">24. h4</div>
-<div class="logDiv">25. g6</div>
-<div class="logDiv">26. h8</div>
-<div class="logDiv">27. f7</div>
-<div class="logDiv">28. d8</div>
-<div class="logDiv">29. b7</div>
-<div class="logDiv">30. a5</div>
-<div class="logDiv">31. c6</div>
-<div class="logDiv">32. b8</div>
-<div class="logDiv">33. a6</div>
-<div class="logDiv">34. b4</div>
-<div class="logDiv">35. a2</div>
-<div class="logDiv">36. c1</div>
-<div class="logDiv">37. e2</div>
-<div class="logDiv">38. g1</div>
-<div class="logDiv">39. f3</div>
-<div class="logDiv">40. h2</div>
-<div class="logDiv">41. f1</div>
-<div class="logDiv">42. e3</div>
-<div class="logDiv">43. d5</div>
-<div class="logDiv">44. f6</div>
-<div class="logDiv">45. d7</div>
-<div class="logDiv">46. f8</div>
-<div class="logDiv">47. h7</div>
-<div class="logDiv">48. g5</div>
-<div class="logDiv">49. h3</div>
-<div class="logDiv">50. f4</div>
-<div class="logDiv">51. e6</div>
-<div class="logDiv">52. c5</div>
-<div class="logDiv">53. e4</div>
+
+<!--     <div class="logDiv">53. e4</div>-->
+
     </section>
     <section id="mainControlContainer">
      <section id="takeBackControlContainer">
@@ -201,9 +112,11 @@ var started = false,
  
 
  <!-- js IMPORTS -->
- <script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+ <script type="text/javascript" src="./js/jquery-2.2.2.js"></script>
+<!-- <script type="text/javascript" src="../lib/jquery/jquery-2.2.2.js"></script>-->
  
  <!-- js APPLICATION SCRIPTS -->
+ <script type="text/javascript" src="./js/globals.js"></script>
  <script type="text/javascript" src="./js/setup.js"></script>
  <script type="text/javascript" src="./js/game.js"></script>
  
@@ -211,10 +124,7 @@ var started = false,
  <script></script>
 
  <!-- TEST SCRIPT -->
- <script>
- 
- 
- </script>
+ <script></script>
  
 
  <!-- EVENT HANDLERS -->
