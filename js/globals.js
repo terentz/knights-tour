@@ -5,7 +5,7 @@
  */
 /* JS GLOBALS */
 
-// constants 
+/* CONSTANTS */
 var minSquareSize = 50,
     minSqPerSide = 3,
     maxSqPerSide = 12,
@@ -14,7 +14,7 @@ var minSquareSize = 50,
     knightImgTag = '<img id="' + knightImgId + '" src="' + knightImgPath + '" alt="current position"/>',
     asciiDiff = 96;
 	
-// generated 
+/* CALCULATED */ 
 var browserWidth = 0,
     browserHeight = 0,
     numCols = 0,
@@ -23,7 +23,7 @@ var browserWidth = 0,
     sqSize = 59, // TODO generate this value 
     orientation = "landscape";	// TODO generate this value 
 
-// dynamic 
+/* DYNAMIC */
 var started = false,
     allSquares = new Array(), 
     usedSquares = new Array(), 
@@ -32,4 +32,8 @@ var started = false,
     nextId = "",
     moveNum = 0;
 
+/* TODO
+ * wtf did i mean by scrollOverlap???
+ * 
+ */
 

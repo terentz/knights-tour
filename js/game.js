@@ -9,10 +9,11 @@
 
 
 function move() {
-    nextId = $(event.currentTarget).attr("id");
+    var target = $(event.currentTarget);
+    nextId = target.attr('id');
 
     // If move is takeback ... 
-    if ( nextId == currId ) { 
+    if ( nextId === currId ) { 
         moveBack();
         return;
     }
@@ -25,9 +26,10 @@ function move() {
         moveNum++;
 
         //  adjust css classes 
-        $(event.currentTarget).addClass('current');
+        target.addClass('current');
+        
         // place the knight 
-        $(event.currentTarget).html(knightImgTag);
+        target.html(knightImgTag);
         $("#moveLogContainer").removeClass('hidden');
         addToLog(nextId);
 
@@ -35,10 +37,11 @@ function move() {
         setValid(nextId);
 
         // update globals 
+        usedSquares.push(nextId);
         currId = nextId;
         nextId = "";
 
-    // otherwise... 
+    // if not first move... 
     } else {
 
         // forward move... 
@@ -48,13 +51,12 @@ function move() {
         var available = false;
 
         // test if used or not 
-        if ( !$(event.currentTarget).hasClass('used') ) {
+        if ( !target.hasClass('used') ) {
             available = true;
         }
 
         // test for validity
-        if ( $(event.currentTarget).hasClass('valid') ) {
-        //if ( $("#" + nextId).hasClass('valid') ) {
+        if ( target.hasClass('valid') ) {
             validMove = true;
         }
 
@@ -79,7 +81,8 @@ function move() {
             $("#"+currId).removeClass('current');
             $("#"+currId).addClass('used');
             $(".valid").removeClass('valid');
-            usedSquares.push(currId);
+//            usedSquares.push(currId);
+            usedSquares.push(nextId);
 
             // place knight on new square 
             $("#"+nextId).addClass('current');
@@ -97,7 +100,7 @@ function move() {
         }
 
         // If completed the tour... 
-        if ( moveNum == requiredMoves ) {
+        if ( moveNum === requiredMoves ) {
             alert('You have completed the tour - CONGRATULATIONS!!');
             // TODO add functionality to print and email result (with board and log) 
         }
@@ -113,29 +116,58 @@ function moveBack() {
         deleteFromLog();
 
         // If not first move ... 
-        if ( usedSquares.length > 0 ) {
-            //alert('num used: ' + usedSquares.length);
+//        if ( usedSquares.length > 0 ) {
+//
+//            // set new current square 
+//            currId = usedSquares.pop();
+//            $("#" + currId).removeClass('used');
+//            $("#" + currId).addClass('current');
+//            $("#" + currId).text("");
+//            $("#" + currId).html(knightImgTag);
+//            // set valid squares 
+//            setValid(currId);
+        if ( usedSquares.length > 1 ) {
 
             // set new current square 
-            currId = usedSquares.pop();
+            usedSquares.pop();
+            var len = usedSquares.length;
+            currId = usedSquares[len-1];
             $("#" + currId).removeClass('used');
             $("#" + currId).addClass('current');
             $("#" + currId).text("");
             $("#" + currId).html(knightImgTag);
             // set valid squares 
             setValid(currId);
-            //alert('num used: ' + usedSquares.length);
 
         // If current was first move ... 	 
         } else {
             //alert('num used: ' + usedSquares.length);
 
             // reset first square 
-            currId = "";
+//            currId = "";
+//            $("#" + nextId).removeClass('current');
+//            $("#" + nextId).html("");
+//            $("#" + nextId).text("");
+//
+//            // set valid squares 
+//            $(".valid").removeClass('valid');
+//            $(".square").addClass('valid');
+//
+//            //alert('num used: ' + usedSquares.length);
+//            // hide the log container
+//            $("#moveLogContainer").addClass('hidden');
+//            // reset game flag 
+//            started = false;
+            
+            nextId = usedSquares[0];
+            usedSquares.pop();
             $("#" + nextId).removeClass('current');
             $("#" + nextId).html("");
             $("#" + nextId).text("");
-
+            nextId = "";
+            currId = "";
+            prevId = "";
+            
             // set valid squares 
             $(".valid").removeClass('valid');
             $(".square").addClass('valid');
@@ -146,6 +178,7 @@ function moveBack() {
             // reset game flag 
             started = false;
 
+
         }
         --moveNum;
         return;
@@ -153,7 +186,6 @@ function moveBack() {
 }
 
 function setValid( target ) {
-    //alert('in setValid()');
     $(".valid").removeClass('valid');
     // get the x,y values of target cell 
     var x = target.charCodeAt(0) - asciiDiff;
@@ -177,15 +209,18 @@ function setValid( target ) {
         var diffX = Math.abs(x-currX);
         var diffY = Math.abs(y-currY);
 
-        //alert('before diff test');
         // if values reflect a valid target 
-        if ( ( diffY == 1 && diffX == 2 ) || ( diffY == 2 && diffX == 1 ) ) {
+        if ( ( diffY === 1 && diffX === 2 ) || ( diffY === 2 && diffX === 1 ) ) {
             //alert('after diff test');
             $("#" + id).addClass('valid');
         }
     }
 }
 
+/**
+ * Appends a square id to the move log.
+ * @param {type} id The id to add.
+ */
 function addToLog( id ) {
     var log = document.getElementById('moveLogContainer') ;
     // Remove the <br/>
@@ -194,64 +229,70 @@ function addToLog( id ) {
     var out = '<div class="logDiv">' + moveNum + '.&nbsp;' + id + '</div><br class="clear"/>' ;
     $("#moveLogContainer").append(out);
 }
-
+/**
+ * Removes the last move from the move log.
+ */
 function deleteFromLog( ) {
     var log = document.getElementById('moveLogContainer') ;
     // Remove the <br/> 
     log.removeChild(log.lastChild);
     // Remove the last log entry
     log.removeChild(log.lastChild);
-    // Replace the <br/>
-    var out = '<br class="clear"/>' ;
-    $("#moveLogContainer").append(out);
+    // Add a new <br/>
+    $("#moveLogContainer").append('<br class="clear"/>');
 }
 
-function clearLog( ) { 
-    $("#moveLogContainer").html("");
-    $("#moveLogContainer").text("");
-}
 
 function reset() {
-    var goahead = false;
+    // Init..
+    var proceed = false;
+    var reconfigure = false;
+    // Get reset type & decide whether to proceed..
+    var type = '';
     var caller = $(event.currentTarget).attr('id');
     switch ( caller ) {
     case "BTN_reconfigureBoardDiv" :
-        if ( started ) {
-            goahead = confirm('Are you sure you wish to clear and reconfigure the board?');
-        } else {
-            goahead = true;
-        }
+        proceed = ( started ? confirm('Are you sure you wish to clear and reconfigure the board?') : true );
+        reconfigure = true;
         break;
     case "BTN_resetBoardDiv" :
         if ( started ) {
-            goahead = confirm('Are you sure you wish to clear the board?');
-        }
+            proceed = confirm('Are you sure you wish to clear the board?');
+        } else return; 
         break;
     default:
         alert('unreachable code in game.js->reset()!');
         return;
     }
-    if ( goahead ) {
-        $("#moveLogContainer").addClass('hidden');
-        $(".current").removeClass('current');
-        $(".used").removeClass('used');
-        $(".valid").removeClass('valid');
-        $(".square").html("");
-        $(".square").text("");
-        $(".square").addClass('valid');
-        // reset globals 
-        started = false;
-        usedSquares = new Array(); 
-        prevId = "";
-        currId = "";
-        nextId = "";
-        moveNum = 0;
-        clearLog();
-        if ( caller == "BTN_reconfigureBoardDiv" ) {
+    
+    // Proceed with reset...
+    if ( proceed ) {
+        // Starting with restart...
+        restart();
+        // Then full reconfigure if it's the case..
+        if ( reconfigure ) {
+            numCols = 0;
+            numRows = 0;
+            requiredMoves = 0;
+            allSquares = null;
+            allSquares = new Array();
             $(".uiMain").toggleClass('hidden');
         }
-    }
+    } else return;
 }
+
+
+function restart() {
+    var len = usedSquares.length;
+//    for ( var c = 0 ; c <= len ; ++c ) {
+    for ( var sq = 0 ; sq <= len ; ++sq ) {
+        moveBack();
+    }
+    nextId = "";
+    currId = "";
+    prevId = "";
+}
+
 
 
 

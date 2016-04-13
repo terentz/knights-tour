@@ -1,134 +1,114 @@
 <!DOCTYPE html>
 <html>
-<head>
- <meta charset="UTF-8">
- <link rel="stylesheet" type="text/css" href="./css/ui.css"/>
- <!-- DYNAMIC STYLES -->
- <style id="boardDimensions">
-/* This stylesheet contains dynamically generated styles for the board table */
-td.square {
-	width: 59px;
-	height: 59px;
-}
-img#IMG_knight {
-    height: 54px;
-    color: black;
-}
- </style>
- <title>Knight's Tour Tester</title>
-</head>
-<body>
- <form>
-
-  <!-- TODO: INSERT MAIN HEADING HERE -->
-  <section id="uiContainer">
-  
-   <!-- <section id="configUi" class=""> -->
-   <!-- TEST LINE (swap with above) -->
-   <section id="configUi" class="uiMain">
-    <span class="uiHeading">Knight's Tour Setup</span>
-    <!-- TODO review the above span in a html5 context -->
-    <br/>
-    <br/>
-    <table id="configUiTable">
-     <tr id="numColsRow">
-      <td>
-       <label for="NUM_numCols" id="numColsLabel">width in columns:</label>
-      </td>
-      <td>
-       <input type="number" id="NUM_numCols" name="NUM_numCols" class="boardEdgeInput" min="3" max="12" length="2" value="8"/>
-       
-      </td>
-      <td id="NUM_numCols_msg" class="validationAlertCell">
-      </td>
-     </tr>
-     <tr id="numRowsRow">
-      <td>
-       <label for="NUM_numRows" id="numRowsLabel">height in rows:</label>
-      </td>
-      <td>
-       <input type="number" id="NUM_numRows" name="NUM_numRows" class="boardEdgeInput" min="3" max="12" size="2" value="8"/>
-      </td>
-      <td id="NUM_numRows_msg" class="validationAlertCell">
-      </td>
-     </tr>
-     
-     <!-- TODO focus on NUM_numRows after validation -->
-     
-     <tr id="applySettingsRow">
-      <td>
-      </td>
-      <td colspan="2">
-       <div id="applyConfigSettingsDiv" class="uiButton">Show&nbsp;board</div>
-       <!-- 
-       <input type="button" id="BTN_applyConfigSettings" value="Apply settings">
-       -->
-      </td>
-     </tr>
-    </table>
-    <div class="hidden">
-     <input type="number" id="extraField"/>
-    </div>
-   </section> <!-- END configUi -->
+ <head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="./css/ui.css"/>
+  <link rel="icon" href="./img/favicon-32x32.png" type="image/x-icon">
+  <title>Knight's Tour Tester</title>
+ </head>
+ <body>
+  <h3>Knight's Tour</h3>   
+  <form>
    
-   <!-- <section id="boardUi" class="hidden"> -->
-   <!-- TEST LINE (swap with above) -->
-   <section id="boardUi" class="uiMain hidden"> 
-    <section id="boardContainer">
-     <table id="boardTable">
-<!--
-      <tr id="rank4">
-       <td class="rankHeading">1</td>
-       <td id="a1" class="square black"></td>
+   
+   <!-- TODO: INSERT MAIN HEADING HERE -->
+   <section id="uiContainer">
+  
+    <!-- CONFIG UI -->
+    <section id="configUi" class="uiMain">
+     <span class="uiHeading">Knight's Tour Setup</span>
+     <!-- TODO review the above span in a html5 context -->
+     <br/>
+     <br/>
+     <table id="configUiTable">
+      <tr id="numColsRow">
+       <td>
+        <label for="NUM_numCols" id="numColsLabel">width in columns:</label>
+       </td>
+       <td>
+        <input type="number" id="NUM_numCols" name="NUM_numCols" class="boardSideInput" min="3" max="12" length="2" value="8"/>
+         
+       </td>
+       <td id="NUM_numCols_msg" class="validationAlertCell">
+       </td>
       </tr>
-      <tr>
-       <td></td>
-       <td>a</td>
-      </tr> 
--->
+      <tr id="numRowsRow">
+       <td>
+        <label for="NUM_numRows" id="numRowsLabel">height in rows:</label>
+       </td>
+       <td>
+        <input type="number" id="NUM_numRows" name="NUM_numRows" class="boardSideInput" min="3" max="12" size="2" value="8"/>
+       </td>
+       <td id="NUM_numRows_msg" class="validationAlertCell">
+       </td>
+      </tr>
+      
+      <!-- TODO focus on NUM_numRows after validation -->
+     
+      <tr id="applySettingsRow">
+       <td>
+       </td>
+       <td colspan="2">
+        <div id="applyConfigSettingsDiv" class="uiButton">Show&nbsp;board</div>
+        <!-- 
+        <input type="button" id="BTN_applyConfigSettings" value="Apply settings">
+        -->
+       </td>
+      </tr>
      </table>
-    </section> <!-- END boardContainer -->
-
-    <section id="moveLogContainer" class="hidden">
-
-<!--     <div class="logDiv">53. e4</div>-->
-
-    </section>
-    <section id="mainControlContainer">
-     <section id="takeBackControlContainer">
-      <div id="BTN_takeBackMoveDiv" class="uiButton">Move&nbsp;back</div>
-     </section>
-     <section id="resetControlContainer">
-      <div id="BTN_resetBoardDiv" class="uiButton">Clear&nbsp;board</div>
-      <br/><div id="BTN_reconfigureBoardDiv" class="uiButton">Reconfigure</div>
-     </section>
-	</section>    
+     <div class="hidden">
+      <input type="number" id="extraField"/>
+     </div>
+    </section> <!-- END configUi -->
     
-   </section> <!-- END boardUi -->
+    <!-- GAME UI -->
+    <section id="gameUi" class="uiMain hidden"> 
+     
+     <!-- BOARD OF PLAY -->
+     <section id="boardContainer">
+      <table id="boardTable">
+      </table>
+     </section> <!-- END boardContainer -->
+     
+     <!-- INSTRUCTIONS -->
+     <section id="instructions">
+      <h3>Instructions</h3>
+      <p>
+       Start anywhere on the board.  Move through the board as you would a normal
+       knight in chess, such that each square is visited exactly once.
+      </p> 
+      <p>
+       To move (and start), click on a square. To go back, you can (obviously) 
+       click on "move back", or just click on the knight.
+      </p>
+     </section>
+    
+     <!-- MOVE LOG -->
+     <section id="moveLogContainer" class="hidden">
+     </section>  
+
+     <!-- CONTROLS -->
+     <section id="controlContainer">
+      <div id="BTN_takeBackMoveDiv" class="uiButton">Move&nbsp;back</div><br/>
+      <div id="BTN_resetBoardDiv" class="uiButton">Clear&nbsp;board</div><br/>
+      <div id="BTN_reconfigureBoardDiv" class="uiButton">Reconfigure</div>
+     </section>    
+     
+    </section> <!-- END boardUi -->
+     
+   </section> <!-- END uiContainer -->
    
-  </section> <!-- END uiContainer -->
-  
- </form>
+  </form>
  
 
- <!-- js IMPORTS -->
- <script type="text/javascript" src="./js/jquery-2.2.2.js"></script>
-<!-- <script type="text/javascript" src="../lib/jquery/jquery-2.2.2.js"></script>-->
+  <!-- JS IMPORTS -->
+  <script type="text/javascript" src="./js/jquery-2.2.2.js"></script>
+  <script type="text/javascript" src="./js/globals.js"></script>
+  <script type="text/javascript" src="./js/setup.js"></script>
+  <script type="text/javascript" src="./js/game.js"></script>
  
- <!-- js APPLICATION SCRIPTS -->
- <script type="text/javascript" src="./js/globals.js"></script>
- <script type="text/javascript" src="./js/setup.js"></script>
- <script type="text/javascript" src="./js/game.js"></script>
- 
- <!-- js PRE-LOAD FUNCTIONS -->
- <script></script>
-
- <!-- TEST SCRIPT -->
- <script></script>
- 
-
- <!-- EVENT HANDLERS -->
- <script>
+  <!-- EVENT HANDLERS -->
+  <script>
 //$(".square").bind("click", move);
 //$("#BTN_resetBoardDiv").bind("click", reset);
 //$(document).on("click", "#BTN_resetBoardDiv", reset);
@@ -136,17 +116,13 @@ img#IMG_knight {
 
 
 $("#applyConfigSettingsDiv").bind("click", showBoard);
-$(".boardEdgeInput").on("blur keyup", validateBoardSizeField);
+$(".boardEdgeInput").on("blur keyup", validateBoardSideInput);
 $("#BTN_resetBoardDiv").bind("click", reset);
 $("#BTN_reconfigureBoardDiv").bind("click", reset);
 $("#BTN_takeBackMoveDiv").bind("click", moveBack);
 //$(document).on( 'click', "#BTN_takeBackMoveDiv", moveBack );
- </script>
+  </script>
 
 
-<!-- js POST LOAD FUNCTIONS -->
- 
- 
- 
-</body>
+ </body>
 </html>

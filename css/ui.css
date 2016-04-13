@@ -18,6 +18,8 @@ html{
     width: 530px;
 }
 #uiContainer {
+
+
     /* START TESTING */
 	
     /* END TESTING */
@@ -58,6 +60,7 @@ table#boardTable {
 td {
     text-align:center;
 }
+
 /* HEADINGS */
 td.tableHeading {
     color: #F6F6F6;
@@ -71,7 +74,14 @@ td.fileHeading {
     padding-bottom:3px;
 }
 /* SQUARES */
+img#IMG_knight {
+    max-width: 100%;
+    height: 54px;
+    color: black;
+}
 td.square {
+    width: 59px;
+    height: 59px;
     margin: 0px;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
@@ -90,10 +100,6 @@ td.black {
 td.current {
 	
 }
-img#IMG_knight {
-    max-width: 100%;
-}
-
 td.valid:hover, td.current:hover{
     cursor: pointer;
 }
@@ -149,21 +155,21 @@ section#resetControlContainer div {
     margin-bottom:4px;	
 }
 */
-section#mainControlContainer * div {
+section#controlContainer * div {
     margin-top:4px;
     margin-bottom:4px;	
 }
-section#mainControlContainer {
+section#controlContainer {
     position: absolute;
     top: 400px;
     left: 550px;
 }
-section#takeBackControlContainer {
+#takeBackControlContainer {
     position: absolute;
     top: 0px;
     left: 0px;
 }
-section#resetControlContainer {
+#resetControlContainer {
     position: absolute;
     top: 480px;
     right: 10px;
@@ -203,6 +209,7 @@ div.uiButton {
     width:100px;
     text-decoration:none;
     text-align:center;
+    margin: 2px;
 /*  text-shadow:1px 1px 0px #ffffff; */
 }
 .uiButton:hover {
