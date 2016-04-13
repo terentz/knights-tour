@@ -116,16 +116,6 @@ function moveBack() {
         deleteFromLog();
 
         // If not first move ... 
-//        if ( usedSquares.length > 0 ) {
-//
-//            // set new current square 
-//            currId = usedSquares.pop();
-//            $("#" + currId).removeClass('used');
-//            $("#" + currId).addClass('current');
-//            $("#" + currId).text("");
-//            $("#" + currId).html(knightImgTag);
-//            // set valid squares 
-//            setValid(currId);
         if ( usedSquares.length > 1 ) {
 
             // set new current square 
@@ -141,23 +131,6 @@ function moveBack() {
 
         // If current was first move ... 	 
         } else {
-            //alert('num used: ' + usedSquares.length);
-
-            // reset first square 
-//            currId = "";
-//            $("#" + nextId).removeClass('current');
-//            $("#" + nextId).html("");
-//            $("#" + nextId).text("");
-//
-//            // set valid squares 
-//            $(".valid").removeClass('valid');
-//            $(".square").addClass('valid');
-//
-//            //alert('num used: ' + usedSquares.length);
-//            // hide the log container
-//            $("#moveLogContainer").addClass('hidden');
-//            // reset game flag 
-//            started = false;
             
             nextId = usedSquares[0];
             usedSquares.pop();
