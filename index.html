@@ -91,7 +91,8 @@
      <section id="controlContainer">
       <div id="BTN_takeBackMoveDiv" class="uiButton">Move&nbsp;back</div><br/>
       <div id="BTN_resetBoardDiv" class="uiButton">Clear&nbsp;board</div><br/>
-      <div id="BTN_reconfigureBoardDiv" class="uiButton">Reconfigure</div>
+      <div id="BTN_reconfigureBoardDiv" class="uiButton">Reconfigure</div><br/>
+      <div id="BTN_solveItDiv" class="uiButton">Solve&nbsp;it!</div>
      </section>    
      
     </section> <!-- END boardUi -->
@@ -106,21 +107,16 @@
   <script type="text/javascript" src="./js/globals.js"></script>
   <script type="text/javascript" src="./js/setup.js"></script>
   <script type="text/javascript" src="./js/game.js"></script>
+  <script type="text/javascript" src="./js/solution.js"></script>
  
   <!-- EVENT HANDLERS -->
   <script>
-//$(".square").bind("click", move);
-//$("#BTN_resetBoardDiv").bind("click", reset);
-//$(document).on("click", "#BTN_resetBoardDiv", reset);
-//$(document).on("click", "#BTN_reconfigureBoardDiv", reset);
-
-
 $("#applyConfigSettingsDiv").bind("click", showBoard);
 $(".boardEdgeInput").on("blur keyup", validateBoardSideInput);
 $("#BTN_resetBoardDiv").bind("click", reset);
 $("#BTN_reconfigureBoardDiv").bind("click", reset);
 $("#BTN_takeBackMoveDiv").bind("click", moveBack);
-//$(document).on( 'click', "#BTN_takeBackMoveDiv", moveBack );
+$("#BTN_solveItDiv").bind("click", solve);
   </script>
 
 

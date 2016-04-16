@@ -44,8 +44,6 @@ function move() {
     // if not first move... 
     } else {
 
-        // forward move... 
-
         // flags 
         var validMove = false;
         var available = false;
@@ -59,7 +57,6 @@ function move() {
         if ( target.hasClass('valid') ) {
             validMove = true;
         }
-
         if ( !available && !validMove ) {
             alert('Invalid move AND square previously visited!');
             nextId = "";
@@ -74,14 +71,12 @@ function move() {
             return;
         // DO DA MOVE!! 
         } else {
-
             // remove knight from current square 
             $("#"+currId).html("");
             $("#"+currId).text(moveNum++);
             $("#"+currId).removeClass('current');
             $("#"+currId).addClass('used');
             $(".valid").removeClass('valid');
-//            usedSquares.push(currId);
             usedSquares.push(nextId);
 
             // place knight on new square 
@@ -127,11 +122,12 @@ function moveBack() {
             $("#" + currId).text("");
             $("#" + currId).html(knightImgTag);
             // set valid squares 
+            prevId = usedSquares[usedSquares.length-2];
             setValid(currId);
+            
 
         // If current was first move ... 	 
         } else {
-            
             nextId = usedSquares[0];
             usedSquares.pop();
             $("#" + nextId).removeClass('current');
@@ -145,13 +141,11 @@ function moveBack() {
             $(".valid").removeClass('valid');
             $(".square").addClass('valid');
 
-            //alert('num used: ' + usedSquares.length);
             // hide the log container
             $("#moveLogContainer").addClass('hidden');
+
             // reset game flag 
             started = false;
-
-
         }
         --moveNum;
         return;
@@ -160,33 +154,72 @@ function moveBack() {
 
 function setValid( target ) {
     $(".valid").removeClass('valid');
+    
     // get the x,y values of target cell 
     var x = target.charCodeAt(0) - asciiDiff;
     var y = ~~Number(target.substring(1));
-    //alert('x:' + x + ' | y:' + y);
-    //alert('typeof allSquares : ' + (typeof allSquares));
-    // iterate thru allSquares 
-    for ( var square in allSquares ) {
-        id = allSquares[square] ;
 
-        // if square has class 'used' 
-        if ( $("#" + allSquares[square]).hasClass('used') ) {
-            // discard it 
-            continue;
-        }
-
-        // get the square's x,y values 
-        var currX = id.charCodeAt(0) - asciiDiff ;
-        var currY = ~~Number(id.substring(1));
-        // get xDiff,yDiff 
-        var diffX = Math.abs(x-currX);
-        var diffY = Math.abs(y-currY);
-
-        // if values reflect a valid target 
-        if ( ( diffY === 1 && diffX === 2 ) || ( diffY === 2 && diffX === 1 ) ) {
-            //alert('after diff test');
-            $("#" + id).addClass('valid');
-        }
+    // Alternative: no iteration...
+    validSquares = new Array();
+    if ( (x+1) <= numCols ) {
+        if ( (y-2) > 0 ) _setValid( String.fromCharCode(asciiDiff + (x+1)) + (y-2).toString());
+        if ( (y+2) <= numRows ) _setValid( String.fromCharCode(asciiDiff + (x+1)) + (y+2).toString());
+    }
+    if ( (x-1) > 0 ) {
+        if ( (y-2) > 0 ) _setValid( String.fromCharCode(asciiDiff + (x-1)) + (y-2).toString());
+        if ( (y+2) <= numRows ) _setValid( String.fromCharCode(asciiDiff + (x-1)) + (y+2).toString());
+    }
+    if ( (x+2) <= numCols ) {
+        if ( (y-1) > 0 ) _setValid( String.fromCharCode(asciiDiff + (x+2)) + (y-1).toString());
+        if ( (y+1) <= numRows ) _setValid( String.fromCharCode(asciiDiff + (x+2)) + (y+1).toString());
+    }
+    if ( (x-2) > 0 ) {
+        if ( (y-1) > 0 ) _setValid( String.fromCharCode(asciiDiff + (x-2)) + (y-1).toString());
+        if ( (y+1) <= numRows ) _setValid( String.fromCharCode(asciiDiff + (x-2)) + (y+1).toString());
+    }
+}
+function _setValid(id) { 
+    if ( usedSquares.indexOf(id) < 0 ) {
+        // test line..
+        console.log('valid:'+id);
+        $("#" + id).addClass('valid');
+        validSquares.push(id);
+    }
+}
+function getXValue( square ) {
+    return square.charCodeAt(0) - asciiDiff;
+}
+function getYValue( square ) {
+    return ~~Number(square.substring(1));
+}
+function getSquareName( x, y ) {
+//    return (char)(x + asciiDiff);
+    return String.fromCharCode(97 + x) + (y+1).toString();
+}
+function validSquareName( input ) {
+    var rgx_sq = /^[a-z][0-9]{1,2}$/;
+    return input.toString().match(rgx_sq);
+}
+function getFile( input ) {
+    if ( typeof input === 'string' && validSquareName( input ) ) {
+        // 'input' is square name..
+        
+    } else if ( typeof input === 'number' && input.toString().match(/^([1-9][0-9])|([1-9])$/)) {
+        // 'input' is x value..
+        return String.fromCharCode(97 + input);
+    } else {
+        console.log('input error in getFile() - input:' + (typeof input).toString() + '(' + input.toString() + ')');
+    }
+}
+function getRank( input ) {
+    if ( typeof input === 'string' && validSquareName( input ) ) {
+        // 'input' is square name..
+                
+    }else if ( typeof input === 'number' && input.toString().match(/^([1-9][0-9])|([1-9])$/)) {
+        // 'input' is y value..
+        
+    } else {
+        console.log('input error in getRank() - input:' + (typeof input).toString() + '(' + input.toString() + ')');
     }
 }
 
@@ -256,9 +289,8 @@ function reset() {
 
 
 function restart() {
-    var len = usedSquares.length;
-//    for ( var c = 0 ; c <= len ; ++c ) {
-    for ( var sq = 0 ; sq <= len ; ++sq ) {
+    var moves = usedSquares.length;
+    for ( var mv = 0 ; mv < moves ; ++mv ) {
         moveBack();
     }
     nextId = "";
