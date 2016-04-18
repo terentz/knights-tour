@@ -30,14 +30,14 @@ function drillFromTop() {
         if ( numRows == numCols ) {
             // If board is square, ie numRows == numCols...
             // 1/8 x allSqaures.length < baseSqaures.length < 1/4 x allSqaures.length
-            //  y       
-            //  3   4       *
-            //  2   3     * *
-            //  1   2   * * * 
-            //  0   1 * * * *
+            //  y      
+            //  4       *
+            //  3   3     * *
+            //  2   2   * * * 
+            //  1   1 * * * *
             //        a b c d
             //        
-            //    x   0 1 2 3
+            //    x   1 2 3 4
             
             var degree = Math.floor((numRows+1)/2);
             

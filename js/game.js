@@ -6,7 +6,7 @@
  * board restrictions.
  */
 
-
+/* HIGH LEVEL PLAY FUNCTIONS */
 
 function move() {
     var target = $(event.currentTarget);
@@ -101,7 +101,6 @@ function move() {
         }
     }
 }
-
 function moveBack() {
     if ( started ) {
         // remove css and img from (old) current 
@@ -152,6 +151,24 @@ function moveBack() {
     }
 }
 
+function addToLog( id ) {
+    var log = document.getElementById('moveLogContainer') ;
+    // Remove the <br/>
+    log.removeChild(log.lastChild);
+    // Add the new log entry
+    var out = '<div class="logDiv">' + moveNum + '.&nbsp;' + id + '</div><br class="clear"/>' ;
+    $("#moveLogContainer").append(out);
+}
+function deleteFromLog( ) {
+    var log = document.getElementById('moveLogContainer') ;
+    // Remove the <br/> 
+    log.removeChild(log.lastChild);
+    // Remove the last log entry
+    log.removeChild(log.lastChild);
+    // Add a new <br/>
+    $("#moveLogContainer").append('<br class="clear"/>');
+}
+
 function setValid( target ) {
     $(".valid").removeClass('valid');
     
@@ -180,12 +197,14 @@ function setValid( target ) {
 }
 function _setValid(id) { 
     if ( usedSquares.indexOf(id) < 0 ) {
-        // test line..
-        console.log('valid:'+id);
         $("#" + id).addClass('valid');
         validSquares.push(id);
     }
 }
+
+
+/* PLAY UTILITY FUNCTIONS */
+
 function getXValue( square ) {
     return square.charCodeAt(0) - asciiDiff;
 }
@@ -193,8 +212,7 @@ function getYValue( square ) {
     return ~~Number(square.substring(1));
 }
 function getSquareName( x, y ) {
-//    return (char)(x + asciiDiff);
-    return String.fromCharCode(97 + x) + (y+1).toString();
+    return String.fromCharCode(asciiDiff + x) + (y).toString();
 }
 function validSquareName( input ) {
     var rgx_sq = /^[a-z][0-9]{1,2}$/;
@@ -223,31 +241,8 @@ function getRank( input ) {
     }
 }
 
-/**
- * Appends a square id to the move log.
- * @param {type} id The id to add.
- */
-function addToLog( id ) {
-    var log = document.getElementById('moveLogContainer') ;
-    // Remove the <br/>
-    log.removeChild(log.lastChild);
-    // Add the new log entry
-    var out = '<div class="logDiv">' + moveNum + '.&nbsp;' + id + '</div><br class="clear"/>' ;
-    $("#moveLogContainer").append(out);
-}
-/**
- * Removes the last move from the move log.
- */
-function deleteFromLog( ) {
-    var log = document.getElementById('moveLogContainer') ;
-    // Remove the <br/> 
-    log.removeChild(log.lastChild);
-    // Remove the last log entry
-    log.removeChild(log.lastChild);
-    // Add a new <br/>
-    $("#moveLogContainer").append('<br class="clear"/>');
-}
 
+/* RESTART FUNCTIONS */ 
 
 function reset() {
     // Init..
@@ -286,8 +281,6 @@ function reset() {
         }
     } else return;
 }
-
-
 function restart() {
     var moves = usedSquares.length;
     for ( var mv = 0 ; mv < moves ; ++mv ) {
