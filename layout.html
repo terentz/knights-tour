@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Layout version</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="./css/ui2.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/layout.css"/>
+    <link rel="icon" href="./img/favicon-32x32.png" type="image/x-icon"/>
+  </head>
+  <body class="HolyGrail">
+    <form>
+    
+      <header>
+        <h2>KNIGHT'S TOUR HEADER</h2>
+      </header>
+    
+      <section id="setupUi">
+        
+        <h3>Set up</h3>
+        
+        <p>
+          As a chess and puzzle enthusiast, it seemed to me that there was a gaping
+          hole in the web's online Knight's Tour implementations - the old Arabic 
+          mathematicians liked to toy with variable board sizes, and no-one had bothered 
+          to create a corresponding digital offering... yet. So, here is the first. For 
+          more info on the Knight's Tour checkout 
+          <a href='http://mathworld.wolfram.com/KnightGraph.html'>this</a> link. Enjoy :)
+        </p>
+        
+        <table id="setupForm">
+<!--          <tr id="numColsRow">-->
+          <tr>
+            <td>
+              <label for="NUM_numCols" id="numColsLabel">width in columns:</label>
+            </td>
+            <td>
+              <input type="number" id="NUM_numCols" name="NUM_numCols" class="boardSideInput" min="3" max="12" value="8"/>
+
+            </td>
+            <td id="NUM_numCols_msg" class="validationAlertCell">
+            </td>
+          </tr>
+<!--          <tr id="numRowsRow">-->
+          <tr>
+            <td>
+              <label for="NUM_numRows" id="numRowsLabel">height in rows:</label>
+            </td>
+            <td>
+            <input type="number" id="NUM_numRows" name="NUM_numRows" class="boardSideInput" min="3" max="12" value="8"/>
+            </td>
+            <td id="NUM_numRows_msg" class="validationAlertCell">
+            </td>
+          </tr>
+
+          <!-- TODO focus on NUM_numRows after validation -->
+
+<!--          <tr id="applySettingsRow">-->
+          <tr>    
+            <td>
+            </td>
+            <td colspan="2">
+              <div id="applyConfigSettingsDiv" class="uiButton">Show&nbsp;board</div>
+              <!-- 
+                <input type="button" id="BTN_applyConfigSettings" value="Apply settings">
+              -->
+            </td>
+          </tr>
+        </table>
+        <div class="hidden">
+          <input type="number" id="extraField"/>
+        </div>
+
+      </section>
+    
+      <section id="gameUi" class="HolyGrail-body">
+      
+        
+        <div id="controlPanel" class="sidebar left">
+          <div id="BTN_takeBackMoveDiv" class="uiButton">Move&nbsp;back</div><br/>
+          <div id="BTN_resetBoardDiv" class="uiButton">Clear&nbsp;board</div><br/>
+          <div id="BTN_reconfigureBoardDiv" class="uiButton">Reconfigure</div><br/>
+          <div id="BTN_solveItDiv" class="uiButton">Solve&nbsp;it!</div>
+        </div>
+
+        <div class="board">
+          <table id="boardTable" class="board">
+            <tbody>
+              <tr>
+                <td class="tableHeading rankHeading">8</td>
+                <td class="square black"></td>
+                <td class="square white"></td>
+                <td class="square black"></td>
+                <td class="square white"></td>
+                <td class="square black"></td>
+                <td class="square white"></td>
+                <td class="square black"></td>
+                <td class="square white"></td>
+              </tr>
+              <tr>
+                <td class="tableHeading rankHeading">7</td>
+                <td class="square white"></td>
+                <td class="square black"></td>
+                <td class="square white"></td>
+                <td class="square black"></td>
+                <td class="square white"></td>
+                <td class="square black"></td>
+                <td class="square white"></td>
+                <td class="square black"></td>
+              </tr>
+              <tr>
+                <td class="tableHeading rankHeading">6</td>
+                <td class="square black"></td>
+                <td class="square white"></td>
+                <td class="square black"></td>
+                <td class="square white"></td>
+                <td class="square black"></td>
+                <td class="square white"></td>
+                <td class="square black"></td>
+                <td class="square white"></td>
+              </tr>
+              <tr>
+                <td class="tableHeading rankHeading">5</td>
+                <td class="square white"></td>
+                <td class="square black"></td>
+                <td class="square white"></td>
+                <td class="square black"></td>
+                <td class="square white"></td>
+                <td class="square black"></td>
+                <td class="square white"></td>
+                <td class="square black"></td>
+              </tr>
+              <tr>
+                <td class="tableHeading rankHeading">4</td>
+                <td class="square black"></td>
+                <td class="square white"></td>
+                <td class="square black"></td>
+                <td class="square white"></td>
+                <td class="square black"></td>
+                <td class="square white"></td>
+                <td class="square black"></td>
+                <td class="square white"></td>
+              </tr>
+              <tr>
+                <td class="tableHeading rankHeading">3</td>
+                <td class="square white"></td>
+                <td class="square black"></td>
+                <td class="square white"></td>
+                <td class="square black"></td>
+                <td class="square white"></td>
+                <td class="square black"></td>
+                <td class="square white"></td>
+                <td class="square black"></td>
+              </tr>
+              <tr>
+                <td class="tableHeading rankHeading">2</td>
+                <td class="square black"></td>
+                <td class="square white"></td>
+                <td class="square black"></td>
+                <td class="square white"></td>
+                <td class="square black"></td>
+                <td class="square white"></td>
+                <td class="square black"></td>
+                <td class="square white"></td>
+              </tr>
+              <tr>
+                <td class="tableHeading rankHeading">1</td>
+                <td class="square white"></td>
+                <td class="square black"></td>
+                <td class="square white"></td>
+                <td class="square black"></td>
+                <td class="square white"></td>
+                <td class="square black"></td>
+                <td class="square white"></td>
+                <td class="square black"></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td class="tableHeading fileHeading">A</td>
+                <td class="tableHeading fileHeading">B</td>
+                <td class="tableHeading fileHeading">C</td>
+                <td class="tableHeading fileHeading">D</td>
+                <td class="tableHeading fileHeading">E</td>
+                <td class="tableHeading fileHeading">F</td>
+                <td class="tableHeading fileHeading">G</td>
+                <td class="tableHeading fileHeading">H</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+
+        <div class="sidebar right">
+          <div class="logDiv">1. a8</div>
+          <div class="logDiv">2. c7</div>
+          <div class="logDiv">3. e8</div>
+          <div class="logDiv">4. f6</div>
+          <div class="logDiv">5. g8</div>
+          <div class="logDiv">6. h6</div>
+          <div class="logDiv">7. f7</div>
+          <div class="logDiv">8. h8</div>
+          <div class="logDiv">9. g6</div>
+          <div class="logDiv">10. e5</div>
+          <div class="logDiv">11. d3</div>
+          <div class="logDiv">12. f4</div>
+          <div class="logDiv">13. h5</div>
+          <div class="logDiv">14. g7</div>
+          <div class="logDiv">15. e6</div>
+          <div class="logDiv">16. f8</div>
+          <div class="logDiv">17. h7</div>
+          <div class="logDiv">18. g5</div>
+          <div class="logDiv">19. f3</div>
+          <div class="logDiv">20. d4</div>
+          <div class="logDiv">21. f5</div>
+        </div>
+
+      
+      </section>
+    
+  
+      <footer>
+        <h3>KNIGHT'S TOUR FOOTER</h3>
+      </footer>
+      
+    </form>
+  </body>
+</html>
+
